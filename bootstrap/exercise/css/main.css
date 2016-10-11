@@ -1,0 +1,13 @@
+body {
+
+}
+#intro {
+    background-image: url(../img/banner.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+h2{
+    /*border-bottom: dotted;*/
+}

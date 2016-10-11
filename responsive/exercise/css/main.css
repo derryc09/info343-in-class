@@ -28,4 +28,31 @@ h2 {
 	margin: 0 auto;
 }
 
+@media (min-width: 1200px){
+    .row {
+        display: flex;
+    }
+    .col{
+        flex-grow: 1;
+    }
+}
+
+@media (min-width: 992px){
+    .row {
+        display: flex;
+    }
+    .col{
+        flex-grow: 1;
+    }
+}
+@media (min-width: 768px){
+
+    .row {
+        display: flex;
+    }
+    .col{
+        flex-grow: 1;
+    }
+}
+
 /* add your styles here */
