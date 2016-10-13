@@ -41,7 +41,9 @@ console.group("PRACTICE: Variables and Basic Types");
 //Create another variable named `y`, assign it the value
 //currently held in the variable `x`, and write the value
 //of `y` to the console log
+var y = x;
 
+console.log("value of y is:", y);
 
 //now assign `y` the numeric value 10
 //what does x contain now? Write it to the console
@@ -79,12 +81,18 @@ console.group("PRACTICE: Strings");
 //and assign it the concatenation of `s2` and `s3`
 //then write it to the console so you can verify it worked.
 
+var s2 = "Hello";
+var s3 = ", my name is Derry";
+var s4 = s2 + s3;
+console.log(s4);
 
 //use the `.trim()` method to remove the leading and
 //trailing white space from this string
 var withSpaces = "    trim those spaces!     ";
+var trimmedString = withSpaces.trim();
+console.log(withSpaces);
 
-
+console.log(trimmedString);
 console.groupEnd();
 
 ///////////////////////////////////////////////////////////
@@ -155,6 +163,18 @@ console.group("PRACTICE: Objects");
 //assigning it to a new variable named `course2`
 //use console.log() to view it in the browser console
 
+
+var course2 = {
+    curriculum: "CSE",
+    number: 373,
+    name: "Data Structures and Algorithms",
+    section: "D",
+    quarter: 1,
+    year: 2017,
+    awesome: true
+};
+
+console.log(course2);
 //now try adding a property named `web site` (with a space)
 //setting it to some string value...it's tricky...
 
@@ -198,6 +218,10 @@ console.group("PRACTICE: Arrays");
 //--PRACTICE--
 //create another array of playing card suits
 //(clubs, diamonds, hearts, spades)
+
+var cardsuits = ["clubs", "diamonds", "hearts", "spades"];
+console.log(cardsuits);
+
 
 
 //then add a new element named "jokers"
@@ -342,7 +366,21 @@ console.group("PRACTICE: Functions");
 //and returns the minimum of the two, or the first argument
 //if they are equal to each other. Then call it a few times
 //with various numbers to test it.
+function findMin(num1, num2) {
+    // if(num1 < num2){
+    //     return num1;
+    // } else if(num2 < num1){
+    //     return num2;
+    // } else {
+    //     return num1;
+    // }
 
+    return num2 < num1 ? num2 : num1;
+}
+
+console.log(findMin(2,3));
+console.log(findMin(22,6));
+console.log(findMin(5,5));
 
 console.groupEnd();
 
@@ -382,7 +420,7 @@ console.log(reversedQuarters);
 //this reduces an array of values to a single value.
 //the function you pass is responsible for returning
 //the new reduced value, given the next array element.
-var myNumbers = [1,2,3,4,5,6,7,8,9,10];
+var myNumbers = [1,2,3,4,5,6,7,8,9,15];
 function addReducer(sum, num) {
     return sum + num;
 }
@@ -415,8 +453,15 @@ function generateRandomNumbers(howMany, minimum, maximum) {
     }
     return randNums;
 }
+function doubleEach(s){
+    return s*2;
+}
 
 //>>> your code goes here!
+var randomNumbers = generateRandomNumbers(100,1,100);
+console.log(randomNumbers);
+console.log(randomNumbers.map());
+
 
 
 //now use the .sort() method on a generated array of random
