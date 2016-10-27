@@ -110,6 +110,8 @@ logValue("2016-10-27", formatAsDate);
 var someNumber = 123456789;
 //logValue(...)
 
+logValue(someNumber, formatAsCurrency);
+logValue(someNumber, formatAsNumber);
 
 
 
@@ -172,6 +174,10 @@ console.log("property names:", propNames);
 
 //and since that's an array, we can use any of the array
 //methods on it...
+console.log("Derry Derry")
+propNames.forEach(function(course) {
+    console.log(course, "=", course[name]);
+}, this);
 
 /**
  * PRACTICE
