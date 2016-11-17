@@ -23,7 +23,7 @@ var osmTiles = {
 //for a list of map styles supported by Mapbox, as well
 //as full documentation about their map tiles API
 var mapboxTiles = {
-    accessToken: "...paste your access token here...",
+    accessToken: "pk.eyJ1IjoiZGNzdGFja292ZXJmbG93IiwiYSI6ImNpdm01OWM4djA4MnUyeXBiYWh1cXJ0cWUifQ.h_1fSExOFBYOPaKhtiD0ig",
     url: "https://api.tiles.mapbox.com/v4/{style}/{z}/{x}/{y}.png?access_token={accessToken}",
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     styles: {
@@ -48,4 +48,61 @@ var seattleCoords = [47.61, -122.33];
 //default zoom level (0-18 for street maps)
 //other map styles may have different zoom ranges
 var defaultZoom = 13;
+// East, positive.
+// North, positive. 
+var map = L.map(mapDiv).setView(seattleCoords, defaultZoom);
+L.tileLayer(mapboxTiles.url, {
+    attribution: mapboxTiles.attribution, 
+    style: mapboxTiles.styles.streets,
+    accessToken: mapboxTiles.accessToken
+}).addTo(map);
 
+function onPosition(position){
+    console.log(position);
+    var latlng = [position.coords.latitude, position.coords.longitude];
+    var marker = L.marker(latlng).addTo(map);
+    map.panTo(latlng);
+}
+
+function onPositionError(err){
+    console.error(err);
+    alert(err.message);
+}
+
+if(navigator && navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(onPosition, onPositionError, {enableHighAccurate: true});
+}
+
+fetch(seattle911API)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+
+        data.forEach(function(record) {
+            var latlng = [record.latitude, record.longitude];
+            var marker = L.circleMarker(latlng,{
+                fillColor: "#F00",
+                color: "#F00",
+                fillOpacity: 0.1
+            }).addTo(map);
+            marker.bindPopup(buildHtml(record));
+        });
+
+    })
+    .catch(function(err){
+        console.error(err);
+        alert(err.message);
+    })
+
+function buildHtml(record){
+
+
+    return (
+        "<p>Address: " + record.address + "<p>"+ 
+        "<span>Response Type: " + record.type + "</span>"+ 
+        "<p>Incident Number: " + record.incident_number + "</p>"
+            );
+
+}
